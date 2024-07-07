@@ -1,12 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { BrandService } from './brand.service';
 
+
 @Controller('brand')
 export class BrandController {
     constructor(private brandService: BrandService) {}
 
     @Post()
-    async newBrand(@Body() brand: { name: string }) {
+    async newBrand(@Body() brand: {name: string, image: string}) {
         return await this.brandService.create(brand)
     }
 
@@ -21,7 +22,7 @@ export class BrandController {
     }
 
     @Put(':id')
-    async updateBrand(@Param('id') id: string, @Body() brand: { name: string }) {
+    async updateBrand(@Param('id') id: string, @Body() brand: { name: string, image: string}) {
         return await this.brandService.update(id, brand);
     }
 
@@ -29,8 +30,4 @@ export class BrandController {
     async deleteBrand(@Param('id') id: string) {
         return await this.brandService.delete(id);
     }
-
-
-
-
 }
