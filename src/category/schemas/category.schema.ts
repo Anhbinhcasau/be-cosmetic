@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
-export class Brand {
+export class Category {
   
   @Prop({
     require: true,
@@ -10,8 +10,8 @@ export class Brand {
   name: string;
 
   @Prop({ require: true })
-  image: string;
+  logo: string;
 
 }
 
-export const BrandSChema = SchemaFactory.createForClass(Brand);
+export const CategorySchema = SchemaFactory.createForClass(Category);
