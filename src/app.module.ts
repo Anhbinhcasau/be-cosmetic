@@ -31,7 +31,7 @@ import { SearchModule } from './search/search.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
-    MongooseModule.forRoot(process.env.DB_LOCAL),
+    MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
     UserModule,
     ProductModule,
