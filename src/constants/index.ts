@@ -8,11 +8,11 @@ export const HEADER = {
 };
 
 export enum StatusOrderEnum{
-  COMPLETED = 1,
-  DELIVERING = 2,
+  GETTING_ITEM = 1,
+  IN_PROGRESS = 2,
   PACKAGING = 3,
-  GETTING_ITEM = 4,
-  IN_PROGRESS = 5,
+  DELIVERING = 4,
+  COMPLETED = 5,
   CANCELED = 6,
 }
 
