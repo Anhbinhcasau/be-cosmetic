@@ -7,7 +7,7 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000', 
+    origin: '*', 
     credentials: true, // Bật chia sẻ thông tin xác thực (cookies, headers, etc.).
   });
   
