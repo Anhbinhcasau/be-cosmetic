@@ -28,7 +28,7 @@ export class AuthService {
     private userService: UserService,
     private cartService: CartService
   ) {}
-  async signUp({ userName, password, email, refreshToken = null }) {
+  async signUp({ userName, password, email}) {
     const holderUsername = await this.userModel.findOne({ userName });
     if (holderUsername) {
       throw new ConflictException('Tài khoản đã tồn tại!');

@@ -29,14 +29,14 @@ export class StatusOrder {
       case StatusOrderEnum.DELIVERING:
         this.state = this.deliveringStatus;
         break;
-      case StatusOrderEnum.GETTING_ITEM:
-        this.state = this.gettingItemStatus;
+      case StatusOrderEnum.PACKAGING:
+        this.state = this.packagingStatus;
         break;
       case StatusOrderEnum.IN_PROGRESS:
         this.state = this.inProgressStatus;
         break;
-      case StatusOrderEnum.PACKAGING:
-        this.state = this.packagingStatus;
+      case StatusOrderEnum.GETTING_ITEM:
+        this.state = this.gettingItemStatus;
         break;
       default:
         throw new HttpException('status not valid', HttpStatus.BAD_REQUEST);

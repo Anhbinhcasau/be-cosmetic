@@ -11,7 +11,6 @@ import { UserDecorator } from 'src/user/Decorator/User.decorator';
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private tokenService: TokenKeyService,
   ) {}
 
   @Post('signup')
