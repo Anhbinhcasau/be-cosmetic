@@ -23,6 +23,7 @@ import { ChatgptModule } from './chatgpt/chatgpt.module';
 import { SearchModule } from './search/search.module';
 import { CategoryModule } from './category/category.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
@@ -48,11 +49,13 @@ import { CategoryModule } from './category/category.module';
       useClass: ValidationPipe,
     },
     EmailService,
-    
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).exclude('auth').forRoutes('user', 'cart', 'orderdetail');
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('auth')
+      .forRoutes('user', 'cart', 'orderdetail');
   }
 }

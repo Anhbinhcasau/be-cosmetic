@@ -22,18 +22,26 @@ export class ProductBuilder {
       this.product.description = description;
       return this;
     }
+    setMaterial(material:string):ProductBuilder{
+      this.product.material=material;
+      return this;
+    }
+    setPriceMain(price_main:number):ProductBuilder{
+      this.product.price=price_main;
+      return this;
+    }
   
     setAttributes(attributes: AttributeDto[]): ProductBuilder {
       this.product.attributes = attributes;
       return this;
     }
   
-    setHighlights(highlights: []): ProductBuilder {
-      this.product.highlights = highlights;
+    setCategory(category:string):ProductBuilder{
+      this.product.category=category;
       return this;
     }
   
-    setMainImage(main_image: Buffer): ProductBuilder {
+    setMainImage(main_image: ArrayBuffer[]): ProductBuilder {
       this.product.main_image = main_image;
       return this;
     }
