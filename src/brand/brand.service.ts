@@ -9,8 +9,8 @@ export class BrandService {
         @InjectModel(Brand.name) private brandModel: Model<Brand>,
     ) {}
 
-    async create({ name}) {
-        return await this.brandModel.create({name});
+    async create({ name, image}) {
+        return await this.brandModel.create({name, image});
     }
 
     async findAll() {
@@ -21,13 +21,11 @@ export class BrandService {
         return await this.brandModel.findById(id).exec();
     }
 
-    async update(id: string, { name }) {
-        return await this.brandModel.findByIdAndUpdate(id, { name }, { new: true }).exec();
+    async update(id: string, { name, image }) {
+        return await this.brandModel.findByIdAndUpdate(id, { name, image }, { new: true }).exec();
     }
 
     async delete(id: string) {
         return await this.brandModel.findByIdAndRemove(id).exec();
-    }
-    
-    
+    }   
 }
