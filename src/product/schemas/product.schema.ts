@@ -19,12 +19,11 @@ export class Product {
   })
   attributes: {
     id: number;
-    color: string;
+    type_product: string;
     class: string;
     quantity: number;
-    devide_storage: string;
     price: number;
-    image: string;
+    image: [];
   }[];
 
   @Prop({
@@ -55,25 +54,26 @@ export class Product {
   description: string;
 
   @Prop({ require: true })
-  main_image: string;
-
-  @Prop({
-    required: true,
-  })
-  highlights: [];
+  main_image: [];
 
   @Prop({
     require: true,
   })
   detail: string;
+  @Prop({
+    require: true,
+  })
+  material: string;
 
   @Prop()
   brand: string;
+  @Prop()
+  category: string;
 
   @Prop({
-    default: []
+    default: [],
   })
-  comments: []
+  comments: [];
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
