@@ -13,20 +13,14 @@ export class AttributeDto {
 
   @IsNotEmpty()
   @IsString()
-  color: string;
+  type_product: string;
 
-  @IsNotEmpty()
-  @IsString()
-  class: string;
 
   @IsNotEmpty()
   @IsPositive()
   @IsInt()
   quantity: number;
 
-  // @IsNotEmpty()
-  // @IsString()
-  // devide_storage?: string;
 
   @IsNumber()
   @IsNotEmpty()

@@ -28,10 +28,11 @@ import { EmailService } from './email/email.service';
 import { ChatgptModule } from './chatgpt/chatgpt.module';
 import { SearchModule } from './search/search.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env' }),
-    MongooseModule.forRoot(process.env.DB_LOCAL),
+    MongooseModule.forRoot(process.env.DB_URI),
     AuthModule,
     UserModule,
     ProductModule,
@@ -51,11 +52,13 @@ import { SearchModule } from './search/search.module';
       useClass: ValidationPipe,
     },
     EmailService,
-    
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).exclude('auth').forRoutes('user', 'cart', 'orderdetail');
+    consumer
+      .apply(AuthMiddleware)
+      .exclude('auth')
+      .forRoutes('user', 'cart', 'orderdetail');
   }
 }

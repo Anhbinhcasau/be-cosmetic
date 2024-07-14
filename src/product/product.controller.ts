@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductDto } from './dto/product.dto';
 import { ObjectId } from 'mongodb';
@@ -32,25 +32,30 @@ export class ProductController {
       idAttr: product.attrId,
     });
   }
-  @Post('delete')
-  async deleteProduct(@Body() product){
-    return await this.productService.deleteProductById({productId: product._id})
+  @Delete(':id')
+  async deleteProduct(@Param('id') _id: Types.ObjectId) {
+    return await this.productService.deleteProductById(_id);
   }
 
-  @Post('updateProduct')
+  @Put('updateProduct')
   async updateProduct(@Body() product: ProductDto) {
     return this.productService.editProductById(product);
   }
 
   @Post('comment')
-  async commentProduct(@Body() comment: CommentDto){
-    return await this.productService.commentProduct(comment)
+  async commentProduct(@Body() comment: CommentDto) {
+    return await this.productService.commentProduct(comment);
   }
 
   @Post('updateUserFavorite')
-  async updateUserFavorite(@Body() data: { productId: string, userId: string, isFavorite: boolean }) {
-    console.log("🚀 ~ ProductController ~ updateUserFavorite ~ data:", data)
-    return await this.productService.updateUserFavorite(data.productId, data.userId, data.isFavorite);
+  async updateUserFavorite(
+    @Body() data: { productId: string; userId: string; isFavorite: boolean },
+  ) {
+    console.log('🚀 ~ ProductController ~ updateUserFavorite ~ data:', data);
+    return await this.productService.updateUserFavorite(
+      data.productId,
+      data.userId,
+      data.isFavorite,
+    );
   }
-
 }

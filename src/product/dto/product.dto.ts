@@ -19,9 +19,6 @@ export class ProductDto {
   @IsString()
   name: string;
 
-  // @IsMongoId()
-  // @IsNotEmpty()
-  // brand: Types.ObjectId
   @IsNumber()
   @IsPositive()
   quantity_sold: number;
@@ -31,21 +28,26 @@ export class ProductDto {
   description: string;
 
   @IsNotEmpty()
+  @IsString()
+  material: string;
+
+  @IsNotEmpty()
   @Type(() => AttributeDto)
   @ValidateNested({ each: true })
   @IsArray()
   attributes: AttributeDto[];
 
-  @IsArray()
   @IsNotEmpty()
-  highlights: [];
-
-  @IsNotEmpty()
-  // @()
-  main_image: Buffer;
+  main_image: ArrayBuffer[];
 
   @IsString()
   brand: string;
+
+  @IsString()
+  category: string;
+
+  @IsNumber()
+  price:number;
 }
 
 export class ProductToCartDto extends AttributeDto {

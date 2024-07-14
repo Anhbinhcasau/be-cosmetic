@@ -35,9 +35,11 @@ export class ProductService {
       .setQuantitySold(product.quantity_sold)
       .setDescription(product.description)
       .setAttributes(product.attributes)
-      .setHighlights(product.highlights)
       .setMainImage(product.main_image)
       .setBrand(product.brand)
+      .setDescription(product.description)
+      .setCategory(product.category)
+      .setPriceMain(product.price)
       .build();
 
     const newItem = await this.productModel.create(builtProduct);
@@ -58,8 +60,8 @@ export class ProductService {
     return listItems;
   }
 
-  async deleteProductById({ productId }) {
-    return await this.productModel.findOneAndDelete({ _id: productId });
+  async deleteProductById(productId:Types.ObjectId ) {
+    return await this.productModel.findOneAndDelete(productId);
   }
 
   async updateQuantityProduct({ productId, productAttrId, quantityChange }) {
@@ -113,8 +115,9 @@ export class ProductService {
   async editProductById(product) {
     const { _id, ...productChange } = product;
     const foundProduct = await this.productModel.findById(
-      new Types.ObjectId(_id),
+      new Types.ObjectId(_id), 
     );
+     console.log(product);
     if (!foundProduct) throw new ConflictException('Không tìm thấy sản phẩm');
     if (
       product?.attributes[0].price &&
@@ -261,10 +264,11 @@ export class ProductService {
       .setQuantitySold(product.quantity_sold)
       .setDescription(product.description)
       .setAttributes(product.attributes)
-      .setHighlights(product.highlights)
       .setMainImage(product.main_image)
       .setBrand(product.brand)
       .setDescription(product.description)
+      .setCategory(product.category)
+      .setPriceMain(product.price)
       .build();
 
     const newItem = await this.productModel.create(builtProduct);
