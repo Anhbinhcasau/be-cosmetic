@@ -32,6 +32,6 @@ export class UserService {
   }
 
   async listUser(){
-    return await this.userModel.find().exec()
+    return await this.userModel.find().exec();
   }
 }

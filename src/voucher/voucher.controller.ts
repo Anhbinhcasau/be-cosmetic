@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { VoucherDto, VoucherUseDto } from './dto/d';
 
@@ -22,14 +22,24 @@ export class VoucherController {
         return await this.voucherService.voucherList()
     }
 
-    @Post('remove')
-    async removeVoucher(@Body() voucher: { voucherId: string} ) {
-        return await this.voucherService.removeVoucherById(voucher.voucherId);
+    @Delete('remove/:id')
+    async remove(@Param('id') id: string) {
+        try {
+            await this.voucherService.removeVoucherById(id);
+            return { message: 'Voucher deleted successfully' };
+        } catch (error) {
+            return { error: error.message };
+        }
     }
 
-    @Post('edit')
-    async editVoucher(@Body() voucher){
-        return await this.voucherService.editVoucher(voucher);
+    @Put('edit/:id')
+    async edit(@Param('id') id: string, @Body() voucherDto: VoucherDto) {
+        try {
+            const editedVoucher = await this.voucherService.editVoucher(id, voucherDto);
+            return { voucher: editedVoucher };
+        } catch (error) {
+            return { error: error.message };
+        }
     }
 
     @Post('applyVoucher')
