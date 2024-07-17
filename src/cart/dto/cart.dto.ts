@@ -39,19 +39,11 @@ export class ItemToCartDto {
 
   @IsNotEmpty()
   @IsString()
-  color: string;
-
-  @IsNotEmpty()
-  @IsString()
-  class: string;
+  type_product: string;
 
   @IsNotEmpty()
   @IsInt()
   quantity: number;
-
-  @IsNotEmpty()
-  @IsString()
-  devide_storage: string;
 
   @IsNumber()
   @IsNotEmpty()
@@ -61,10 +53,6 @@ export class ItemToCartDto {
   @IsNotEmpty()
   @IsString()
   image: string;
-
-  @IsNotEmpty()
-  @IsString()
-  description: string;
 }
 
 export class DeleteItemDto {
