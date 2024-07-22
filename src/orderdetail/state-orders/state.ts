@@ -5,9 +5,8 @@ import {
   CompletedItemStatus,
 } from './complete-item.state';
 import { DeliveringStatus } from './delivering.state';
-import { GettingItemStatus } from './getting-item.state';
 import { InProgressStatus } from './in_progress.state';
-import { PackagingStatus } from './packaging.state';
+
 
 @Injectable()
 export class StatusOrder {
@@ -16,9 +15,7 @@ export class StatusOrder {
   constructor(
     private completedItemStatus: CompletedItemStatus,
     private deliveringStatus: DeliveringStatus,
-    private gettingItemStatus: GettingItemStatus,
     private inProgressStatus: InProgressStatus,
-    private packagingStatus: PackagingStatus,
   ) {}
 
   async transitionToState(stateName: StatusOrderEnum): Promise<void> {
@@ -29,14 +26,8 @@ export class StatusOrder {
       case StatusOrderEnum.DELIVERING:
         this.state = this.deliveringStatus;
         break;
-      case StatusOrderEnum.GETTING_ITEM:
-        this.state = this.gettingItemStatus;
-        break;
       case StatusOrderEnum.IN_PROGRESS:
         this.state = this.inProgressStatus;
-        break;
-      case StatusOrderEnum.PACKAGING:
-        this.state = this.packagingStatus;
         break;
       default:
         throw new HttpException('status not valid', HttpStatus.BAD_REQUEST);

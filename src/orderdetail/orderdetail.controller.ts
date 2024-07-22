@@ -24,30 +24,12 @@ export class OrderdetailController {
     return await this.orderDetailService.findOrderDetailById({ orderId });
   }
 
-  @Post('getting_item')
-  async gettingItemOrder(@UserDecorator() user, @Body() orderDetail) {
-    return await this.orderDetailService.changeStatusOrderDetail({
-      userId: orderDetail.userId,
-      orderDetailId: orderDetail._id,
-      status: StatusOrderEnum.GETTING_ITEM,
-    });
-  }
-
   @Post('completed')
   async completedOrderDetail(@UserDecorator() user, @Body() orderDetail) {
     return await this.orderDetailService.changeStatusOrderDetail({
       userId: orderDetail.userId,
       orderDetailId: orderDetail._id,
       status: StatusOrderEnum.COMPLETED,
-    });
-  }
-
-  @Post('packaging')
-  async packagingOrderDetail(@UserDecorator() user, @Body() orderDetail) {
-    return await this.orderDetailService.changeStatusOrderDetail({
-      userId: orderDetail.userId,
-      orderDetailId: orderDetail._id,
-      status: StatusOrderEnum.PACKAGING,
     });
   }
 

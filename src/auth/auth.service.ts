@@ -28,7 +28,7 @@ export class AuthService {
     private userService: UserService,
     private cartService: CartService
   ) {}
-  async signUp({ userName, password, email, refreshToken = null }) {
+  async signUp({ userName, password, email}) {
     const holderUsername = await this.userModel.findOne({ userName });
     if (holderUsername) {
       throw new ConflictException('Tài khoản đã tồn tại!');
@@ -50,7 +50,7 @@ export class AuthService {
 
       const tokens = await keyTokenPairs({ newAccount }, publicKey, privateKey);
       console.log(`tokens::::${tokens}`)
-
+      console.log(`sign in :::: ${newAccount}`)
       const keyStore = this.tokenKeyService.createKeyToken({
         idUser: newAccount._id,
         refreshToken: tokens.refreshToken,
