@@ -50,7 +50,7 @@ export class AuthService {
 
       const tokens = await keyTokenPairs({ newAccount }, publicKey, privateKey);
       console.log(`tokens::::${tokens}`)
-
+      console.log(`sign in :::: ${newAccount}`)
       const keyStore = this.tokenKeyService.createKeyToken({
         idUser: newAccount._id,
         refreshToken: tokens.refreshToken,

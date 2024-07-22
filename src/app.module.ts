@@ -14,7 +14,7 @@ import { BrandModule } from './brand/brand.module';
 import { CartModule } from './cart/cart.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { OrderHistoryModule } from './order-history/order-history.module';
-import { AuthMiddleware } from './middlewares/auth.middleware';
+//import { AuthMiddleware } from './middlewares/auth.middleware';
 import { OrderdetailController } from './orderdetail/orderdetail.controller';
 import { OrderdetailModule } from './orderdetail/orderdetail.module';
 import { VoucherModule } from './voucher/voucher.module';
@@ -54,7 +54,7 @@ import { CategoryModule } from './category/category.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(AuthMiddleware)
+      .apply()
       .exclude('auth')
       .forRoutes('user', 'cart', 'orderdetail');
   }

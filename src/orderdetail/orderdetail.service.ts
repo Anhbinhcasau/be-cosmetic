@@ -49,11 +49,6 @@ export class OrderdetailService {
       updateSet = { status },
       option = { upsert: true };
 
-    // switch(status){
-    //   case 5:
-    //     await this.
-    // }
-
     return await this.orderDetailModel.findOneAndUpdate(
       query,
       updateSet,

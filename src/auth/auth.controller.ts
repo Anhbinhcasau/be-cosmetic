@@ -27,7 +27,7 @@ export class AuthController {
 
   @Post('logout')
   async logout(@UserDecorator() user) {
-    return await this.authService.logout({userId: user._id})
+    return await this.authService.logout({userId: user._id});
   }
 
   @Get('google')
