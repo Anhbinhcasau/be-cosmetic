@@ -60,7 +60,7 @@ export class ProductService {
     return listItems;
   }
 
-  async deleteProductById(productId:Types.ObjectId ) {
+  async deleteProductById(productId: Types.ObjectId) {
     return await this.productModel.findOneAndDelete(productId);
   }
 
@@ -92,10 +92,10 @@ export class ProductService {
     if (!foundProduct) throw new BadGatewayException('Không tìm thấy sản phẩm');
     const comments: any = foundProduct.comments || [];
 
-    for (const [index, comment] of comments.entries()) {
-      const user: any = await this.userService.findByUserId(comment.userId);
-      foundProduct.comments[index].userId = user;
-    }
+    // for (const [index, comment] of comments.entries()) {
+    //   const user: any = await this.userService.findByUserId(comment.userId);
+    //   foundProduct.comments[index].userId = user;
+    // }
     return foundProduct;
   }
 
@@ -115,9 +115,9 @@ export class ProductService {
   async editProductById(product) {
     const { _id, ...productChange } = product;
     const foundProduct = await this.productModel.findById(
-      new Types.ObjectId(_id), 
+      new Types.ObjectId(_id),
     );
-     console.log(product);
+    console.log(product);
     if (!foundProduct) throw new ConflictException('Không tìm thấy sản phẩm');
     if (
       product?.attributes[0].price &&
