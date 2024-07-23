@@ -13,6 +13,7 @@ import { Type } from 'class-transformer';
 
 import { AttributeDto } from './attributes.tdo';
 import { Types } from 'mongoose';
+import { CommentDto } from './comments.dto';
 
 export class ProductDto {
   @IsNotEmpty()
@@ -39,6 +40,12 @@ export class ProductDto {
 
   @IsNotEmpty()
   main_image: ArrayBuffer[];
+  
+  @IsNotEmpty()
+  @Type(() => CommentDto)
+  @ValidateNested({ each: true })
+  @IsArray()
+  comment: CommentDto[];
 
   @IsString()
   brand: string;
@@ -47,7 +54,7 @@ export class ProductDto {
   category: string;
 
   @IsNumber()
-  price:number;
+  price: number;
 }
 
 export class ProductToCartDto extends AttributeDto {
