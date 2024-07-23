@@ -4,6 +4,7 @@ import {
   IsMongoId,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
@@ -68,5 +69,7 @@ export class DeleteItemDto {
   @IsMongoId()
   productId: Types.ObjectId;
 
-  id: Number;
+  @IsOptional() // Make id optional if it's not always req
+  @IsInt()
+  id?: number;
 }

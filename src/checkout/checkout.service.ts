@@ -64,10 +64,10 @@ export class CheckoutService extends CheckoutProcessAbstract {
     return orderHistory;
   }
 
-  // async reviewCheckout(infoCheckout: CheckoutDto) {
+  async reviewCheckout(infoCheckout: CheckoutDto) {
 
-  //   // Send email after successful checkout
-  //   // await this.emailService.sendOrderConfirmationEmail(infoCheckout);
+    //Send email after successful checkout
+    await this.emailService.sendOrderConfirmationEmail(infoCheckout);
 
-  // }
+  }
 }

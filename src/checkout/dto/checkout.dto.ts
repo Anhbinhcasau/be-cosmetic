@@ -42,7 +42,9 @@ export class CheckoutDto {
   @IsNotEmpty()
   phone_number: string;
 
+  @IsNumber()
   price_sale?: number;
 
+  @IsNumber()
   percent_sale?: number;
 }
