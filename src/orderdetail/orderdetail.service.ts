@@ -25,7 +25,9 @@ export class OrderdetailService {
   }
 
   async findOrderHistoryByUserId({ userId }) {
-    return await this.orderDetailModel.find({ userId });
+    return await this.orderDetailModel.find({
+      userId: userId,
+    });
   }
 
   async findOrderDetailById({ orderId }) {
