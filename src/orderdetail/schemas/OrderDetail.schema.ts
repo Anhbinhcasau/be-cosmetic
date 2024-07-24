@@ -7,11 +7,6 @@ import { StatusOrderEnum } from 'src/constants';
 
 @Schema()
 export class OrderDetail {
-  // @Prop({
-  //     required: true,
-  //     ref: 'brand'
-  //   })
-  //   brand: Types.ObjectId;
 
   @Prop({
     required: true,
@@ -77,11 +72,6 @@ export class OrderDetail {
     default: () => new Date(),
   })
   updateAt: Date;
-
-  @Prop({
-    required: true,
-  })
-  payment: string;
 }
 
 export const OrderDetailSchema = SchemaFactory.createForClass(OrderDetail);
