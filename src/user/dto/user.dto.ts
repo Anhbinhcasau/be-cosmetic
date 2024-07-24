@@ -1,12 +1,7 @@
-import {
-  IsNotEmpty,
-  Length,
-  IsString,
-  IsEmail,
-  IsBoolean,
-  IsEmpty,
-} from 'class-validator';
+import { IsNotEmpty, Length, IsString, IsEmail, IsBoolean, IsArray, ArrayNotEmpty, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer'; 
 import { Roles } from 'src/constants';
+import { ProductDto } from 'src/product/dto/product.dto';
 
 export class UserDto {
   @IsNotEmpty()
@@ -27,4 +22,10 @@ export class UserDto {
   @IsNotEmpty()
   @IsString()
   role: String;
+
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => ProductDto)
+  favorite: ProductDto[];
 }

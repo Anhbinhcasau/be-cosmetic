@@ -36,8 +36,8 @@ export class User {
   @Prop()
   address: string | undefined;
 
-  // @Prop()
-  // role: string
+  @Prop()
+  favorite: []
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

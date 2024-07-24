@@ -38,6 +38,7 @@ export class ProductService {
       .setMainImage(product.main_image)
       .setBrand(product.brand)
       .setDescription(product.description)
+      .setDescription(product.material)
       .setCategory(product.category)
       .setPriceMain(product.price)
       .build();
@@ -61,7 +62,7 @@ export class ProductService {
   }
 
   async deleteProductById(productId: Types.ObjectId) {
-    return await this.productModel.findOneAndDelete(productId);
+    return await this.productModel.findByIdAndDelete(productId);
   }
 
   async updateQuantityProduct({ productId, productAttrId, quantityChange }) {
@@ -280,5 +281,7 @@ export class ProductService {
       status: 201,
       metadata: product,
     };
+    
   }
+  
 }
