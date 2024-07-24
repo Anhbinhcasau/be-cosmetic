@@ -7,7 +7,7 @@ import { StatusOrderEnum } from 'src/constants/index';
 export class OrderdetailController {
   constructor(private orderDetailService: OrderdetailService) {}
 
-  @Get(':userId')
+  @Get('getAll/:userId')
   async orderHistory(@Param('userId') userId) {
     return this.orderDetailService.findOrderHistoryByUserId({ userId });
   }
