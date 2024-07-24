@@ -281,5 +281,7 @@ export class ProductService {
       status: 201,
       metadata: product,
     };
+    
   }
+  
 }

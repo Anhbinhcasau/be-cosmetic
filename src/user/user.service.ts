@@ -6,6 +6,8 @@ import {
 import { User } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Error, Model, Types } from 'mongoose';
+import { ProductDto } from 'src/product/dto/product.dto';
+import { Product } from 'src/product/schemas/product.schema';
 
 @Injectable()
 export class UserService {
@@ -37,11 +39,50 @@ export class UserService {
   }
 
   async listUser() {
-    const listUser = await this.userModel.find().exec();
-    console.log(listUser);
-    console.log('first');
-    if (!listUser) throw new ConflictException('Không tìm thấy sản phẩm');
+    return await this.userModel.find().exec();
+  }
+  async addFavorite(userId, product) {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
 
-    return listUser;
+    // Cập nhật danh sách yêu thích của người dùng
+    const filter = { _id: userId };
+    const update = {
+      $push: {
+        favorite: { ...product },
+      },
+    };
+    const options = { new: true, upsert: true };
+
+    return await this.userModel.findByIdAndUpdate(filter, update, options);
+  }
+  async removeFavorite(userId, product) {
+    console.log(
+      `Attempting to remove product: ${JSON.stringify(
+        product,
+      )} from user: ${userId}`,
+    );
+
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    console.log('Current user favorites:', user.favorite);
+
+    // Cập nhật danh sách yêu thích của người dùng
+    const filter = { _id: userId };
+    const update = {
+      $pull: {
+        favorite: { _id: product._id }, // Sử dụng _id để xóa sản phẩm
+      },
+    };
+    const options = { new: true };
+
+    const result = await this.userModel.updateOne(filter, update, options);
+
+    return result;
   }
 }

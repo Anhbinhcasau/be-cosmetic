@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -14,13 +15,11 @@ import { KeyStore } from 'src/auth/decorator/KeyStore.decorator';
 import { UserDecorator } from './Decorator/User.decorator';
 import { RefreshToken } from 'src/auth/decorator/RefreshToken.decorator';
 import { Types } from 'mongoose';
+import { ProductDto } from 'src/product/dto/product.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(
-    private userService: UserService,
-   
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Get('profileById/:id')
   async findUserById(@Param('id') id) {
@@ -55,5 +54,21 @@ export class UserController {
   @Post('edit')
   async edit(@Body() user) {
     return await this.userService.changeProfileUser({ user });
+  }
+  @Post('favorite')
+  async updateFavorite(
+    @Body() infoUpdate: { userId: string; product: ProductDto },
+  ) {
+    const { userId, ...product } = infoUpdate;
+    // Gọi phương thức để thêm sản phẩm vào danh sách yêu thích của người dùng
+    return await this.userService.addFavorite(userId, product);
+  }
+  @Delete('deletefavorite')
+  async deleteFavorite(
+    @Body() infoUpdate: { userId: string; product: ProductDto },
+  ) {
+    const { userId, ...product } = infoUpdate;
+    // Gọi phương thức để thêm sản phẩm vào danh sách yêu thích của người dùng
+    return await this.userService.removeFavorite(userId, product);
   }
 }

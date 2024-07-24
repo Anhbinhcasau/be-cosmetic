@@ -11,7 +11,6 @@ import { UserDecorator } from 'src/user/Decorator/User.decorator';
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private tokenService: TokenKeyService,
   ) {}
 
   @Post('signup')
@@ -28,7 +27,7 @@ export class AuthController {
 
   @Post('logout')
   async logout(@UserDecorator() user) {
-    return await this.authService.logout({userId: user._id})
+    return await this.authService.logout({userId: user._id});
   }
 
   @Get('google')

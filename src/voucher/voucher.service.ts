@@ -41,7 +41,7 @@ export class VoucherService {
 
     }
 
-    async editVoucher(voucher){
+    async editVoucher(voucher, voucherDto: VoucherDto){
         const foundVoucher = await this.voucherModel.findOne({ _id: new Types.ObjectId(voucher._id)})
         if(!foundVoucher) throw new HttpException('Không tìm thấy voucher', 403)
     
